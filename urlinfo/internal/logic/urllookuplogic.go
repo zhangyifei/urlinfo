@@ -2,7 +2,6 @@ package logic
 
 import (
 	"context"
-	"fmt"
 
 	"urlinfo/urlinfo/internal/model"
 	"urlinfo/urlinfo/internal/svc"
@@ -25,19 +24,24 @@ func NewurlinfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *urlinfoLo
 	}
 }
 
-func (l *urlinfoLogic) UrlLookup(req *types.Request) (resp *types.Response, err error) {
+func (l *urlinfoLogic) UrlLookup(req *types.Request) (resp *types.LookupResponse, err error) {
 
 	queryString := model.DBQueryString{Hostnameport: req.Hostnameport, Queryparamter: req.Queryparamter}
 
 	url, err := l.svcCtx.Model.FindOne(l.ctx, queryString)
 
-	if err != nil {
+	switch err {
+	case nil:
+		return &types.LookupResponse{
+			Message: url.Hostnameport + "--" + url.Queryparamter + "is invalid",
+			Allow:   false,
+		}, nil
+	case model.ErrNotFound:
+		return &types.LookupResponse{
+			Message: "the url is valid",
+			Allow:   true,
+		}, nil
+	default:
 		return nil, err
 	}
-
-	fmt.Println(url.Queryparamter)
-
-	return &types.Response{
-		Message: url.Hostnameport + "--" + url.UpdateDate.GoString(),
-	}, nil
 }

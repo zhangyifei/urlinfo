@@ -1,0 +1,244 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "UrlInfo",
+    "version": ""
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/urlinfo/{apiversion}/batchupdate": {
+      "post": {
+        "summary": "Batch add new Url",
+        "operationId": "UrlBatchUpdateHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "apiversion",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchUpdateRequest"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "urlinfo-api"
+        ]
+      }
+    },
+    "/urlinfo/{apiversion}/update": {
+      "post": {
+        "summary": "Add new Url",
+        "operationId": "UrlUpdateHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "apiversion",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateRequest"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "urlinfo-api"
+        ]
+      }
+    },
+    "/urlinfo/{apiversion}/{hostnameport}/{queryparamter}": {
+      "get": {
+        "summary": "Look up url",
+        "operationId": "UrlLookupHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/LookupResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "apiversion",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostnameport",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "queryparamter",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "urlinfo-api"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "BatchUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "apiversion": {
+          "type": "string"
+        },
+        "requests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateRequestWithoutVersion"
+          }
+        }
+      },
+      "title": "BatchUpdateRequest",
+      "required": [
+        "apiversion",
+        "requests"
+      ]
+    },
+    "LookupResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "allow": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "LookupResponse",
+      "required": [
+        "message",
+        "allow"
+      ]
+    },
+    "Request": {
+      "type": "object",
+      "properties": {
+        "apiversion": {
+          "type": "string"
+        },
+        "hostnameport": {
+          "type": "string"
+        },
+        "queryparamter": {
+          "type": "string"
+        }
+      },
+      "title": "Request",
+      "required": [
+        "apiversion",
+        "hostnameport",
+        "queryparamter"
+      ]
+    },
+    "Response": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "title": "Response",
+      "required": [
+        "message"
+      ]
+    },
+    "UpdateRequest": {
+      "type": "object",
+      "properties": {
+        "apiversion": {
+          "type": "string"
+        },
+        "hostnameport": {
+          "type": "string"
+        },
+        "queryparamter": {
+          "type": "string"
+        }
+      },
+      "title": "UpdateRequest",
+      "required": [
+        "apiversion",
+        "hostnameport",
+        "queryparamter"
+      ]
+    },
+    "UpdateRequestWithoutVersion": {
+      "type": "object",
+      "properties": {
+        "hostnameport": {
+          "type": "string"
+        },
+        "queryparamter": {
+          "type": "string"
+        }
+      },
+      "title": "UpdateRequestWithoutVersion",
+      "required": [
+        "hostnameport",
+        "queryparamter"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "description": "Enter JWT Bearer token **_only_**",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ]
+}

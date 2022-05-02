@@ -1,3 +1,5 @@
+goctl api plugin -plugin goctl-swagger="swagger -filename urlinfo.json" -api urlinfo.api -dir .
+
 docker-compose up --build -d
 docker-compose down
 

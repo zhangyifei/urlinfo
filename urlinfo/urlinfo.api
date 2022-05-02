@@ -1,3 +1,9 @@
+info(
+	title: "UrlInfo"
+	author: "Yifei Zhang"
+	email: "yifeizhang1016@gmail.com"
+)
+
 type UpdateRequestWithoutVersion {
 	Hostnameport  string `json:"hostnameport"`
 	Queryparamter string `json:"queryparamter"`
@@ -20,6 +26,11 @@ type BatchUpdateRequest {
 	Requests   []UpdateRequestWithoutVersion `json:"requests"`
 }
 
+type LookupResponse {
+	Message string `json:"message"`
+	Allow   bool   `json:"allow"`
+}
+
 type Response {
 	Message string `json:"message"`
 }
@@ -29,13 +40,21 @@ type Response {
 )
 
 service urlinfo-api {
-	
+	@doc(
+		summary: "Look up url"
+	)
 	@handler UrlLookupHandler
-	get /urlinfo/:apiversion/:hostnameport/:queryparamter(Request) returns (Response)
+	get /urlinfo/:apiversion/:hostnameport/:queryparamter(Request) returns (LookupResponse)
 	
+	@doc(
+		summary: "Add new Url"
+	)
 	@handler UrlUpdateHandler
 	post /urlinfo/:apiversion/update(UpdateRequest) returns (Response)
 	
+	@doc(
+		summary: "Batch add new Url"
+	)
 	@handler UrlBatchUpdateHandler
 	post /urlinfo/:apiversion/batchupdate(BatchUpdateRequest) returns (Response)
 }

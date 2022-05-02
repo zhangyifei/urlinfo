@@ -23,6 +23,11 @@ type BatchUpdateRequest struct {
 	Requests   []UpdateRequestWithoutVersion `json:"requests"`
 }
 
+type LookupResponse struct {
+	Message string `json:"message"`
+	Allow   bool   `json:"allow"`
+}
+
 type Response struct {
 	Message string `json:"message"`
 }
