@@ -21,7 +21,7 @@ Urlinfo is used provide a Url lookup Api service for validating a malware url an
         1.  Url lookup 
         2.  Update or Batch update the Urls 
 
-    Swagger API json [file](docs/urlinfo.json)
+    Swagger API Doc [file](docs/urlinfo.md)
 
 
 - Redis
