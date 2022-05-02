@@ -1,0 +1,7 @@
+Name: urlinfo-api
+Host: 0.0.0.0
+Port: 8888
+DataSource: mongodb://mongos-router0:27017/demo?readPreference=secondaryPreferred
+Collection: urls
+Cache:
+  - Host: redis-server:6379

@@ -1,0 +1,7 @@
+Name: urlinfo-api
+Host: 0.0.0.0
+Port: 8888
+DataSource: mongodb://localhost:27017/demo?readPreference=secondaryPreferred
+Collection: urls
+Cache:
+  - Host: localhost:6379

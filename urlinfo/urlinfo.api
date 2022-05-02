@@ -1,0 +1,41 @@
+type UpdateRequestWithoutVersion {
+	Hostnameport  string `json:"hostnameport"`
+	Queryparamter string `json:"queryparamter"`
+}
+
+type Request {
+	ApiVersion    string `path:"apiversion"`
+	Hostnameport  string `path:"hostnameport"`
+	Queryparamter string `path:"queryparamter"`
+}
+
+type UpdateRequest {
+	ApiVersion    string `path:"apiversion"`
+	Hostnameport  string `json:"hostnameport"`
+	Queryparamter string `json:"queryparamter"`
+}
+
+type BatchUpdateRequest {
+	ApiVersion string                        `path:"apiversion"`
+	Requests   []UpdateRequestWithoutVersion `json:"requests"`
+}
+
+type Response {
+	Message string `json:"message"`
+}
+
+@server(
+	middleware: Tokenlimit
+)
+
+service urlinfo-api {
+	
+	@handler UrlLookupHandler
+	get /urlinfo/:apiversion/:hostnameport/:queryparamter(Request) returns (Response)
+	
+	@handler UrlUpdateHandler
+	post /urlinfo/:apiversion/update(UpdateRequest) returns (Response)
+	
+	@handler UrlBatchUpdateHandler
+	post /urlinfo/:apiversion/batchupdate(BatchUpdateRequest) returns (Response)
+}
