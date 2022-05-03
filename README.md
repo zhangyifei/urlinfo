@@ -34,7 +34,7 @@ Urlinfo is used provide a Url lookup Api service for validating a malware url an
 
 ## How it works
 
-The application is written by Go and based on the [go-zero](https://github.com/zeromicro/go-zero) project. It handle the requests from client side and also use tokenlimit to control the number of requests in order to reduce the server load.
+The application is written by Go and based on the [go-zero](https://github.com/zeromicro/go-zero) project (MIT License). It handle the requests from client side and also use tokenlimit to control the number of requests in order to reduce the server load.
 
 To reduce the memory usage in the app server and ensure the performance, we maintain all the url data in a Mongo DB Shard Cluster. 
 
