@@ -80,7 +80,7 @@ To demonstrate how this solution works, one [docker compose file](compose-soluti
 
 2. Before doing the creation, the docker image of this application should be created first. It can be easily created with ```make build_image```. 
 
-  The configuraion of application container can be modified in [urlinfo-api.yaml](compose-solution/app/urlinfo-api.yaml).
+   The configuraion of application container can be modified in [urlinfo-api.yaml](compose-solution/app/urlinfo-api.yaml).
 
 3. Creation:
 
