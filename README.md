@@ -26,7 +26,11 @@ Urlinfo is used provide a Url lookup Api service for validating a malware url an
 
 - Redis
 
-    The redis instance or cluster is used to do the DB cache
+    The redis instance or cluster is used to do the DB cache. Two configurations are added to redis to maintain the Key eviction.
+    ```
+        maxmemory-policy allkeys-lru
+        maxmemory 300mb
+    ```
 
 - Mongo DB Shard Cluster
 
@@ -88,6 +92,8 @@ Before doing the creation, the docker image of this application should be create
 The configuraion of application container can be modified in [urlinfo-api.yaml](compose-solution/app/urlinfo-api.yaml).
 
 ## Future work
+
+- Perform Loadtest with a large mount of data to know the limit
 
 - Adding monitoring system to this api service by using prometheus
 

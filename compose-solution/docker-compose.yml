@@ -189,6 +189,9 @@ services:
   redis-server:
     image: redis:alpine
     container_name: redis-server
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf   
     networks:
       internalnetwork:
         aliases:
