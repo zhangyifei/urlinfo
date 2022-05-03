@@ -76,19 +76,19 @@ Build Docker image:
 
 To demonstrate how this solution works, one [docker compose file](compose-solution/docker-compose.yml) has been created to create this solution by using several containers. 
 
-- Go to the folder [compose-solution](compose-solution/)
+1. Go to the folder [compose-solution](compose-solution/)
 
-- Before doing the creation, the docker image of this application should be created first. It can be easily created with ```make build_image```. 
+2. Before doing the creation, the docker image of this application should be created first. It can be easily created with ```make build_image```. 
 
   The configuraion of application container can be modified in [urlinfo-api.yaml](compose-solution/app/urlinfo-api.yaml).
 
-- Creation:
+3. Creation:
 
 ```
     docker-compose up --build -d
 ```
 
-- Deletion:
+4. Deletion:
 ```
     docker-compose down
 ```
