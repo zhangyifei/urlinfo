@@ -36,7 +36,7 @@ Urlinfo is used provide a Url lookup Api service for validating a malware url an
 
 The application is written by Go and based on the [go-zero](https://github.com/zeromicro/go-zero) project (MIT License). It handle the requests from client side and also use tokenlimit to control the number of requests in order to reduce the server load.
 
-To reduce the memory usage in the app server and ensure the performance, we maintain all the url data in a Mongo DB Shard Cluster. 
+To reduce the memory usage in the app server and ensure the performance, we maintain all the url data in a Mongo DB Shard Cluster and the **secondaryPreferred** read preference is applied to split the reading and writing requests. 
 
 The new data can be populated by using update/batch update api and we could have another process to automatically update the data by invoking those apis. 
 
