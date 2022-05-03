@@ -76,6 +76,8 @@ Build Docker image:
 
 To demonstrate how this solution works, one [docker compose file](compose-solution/docker-compose.yml) has been created to create this solution by using several containers. 
 
+Go to the folder [compose-solution](compose-solution/)
+
 Creation:
 
 ```
