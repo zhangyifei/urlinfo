@@ -93,6 +93,8 @@ To demonstrate how this solution works, one [docker compose file](compose-soluti
     docker-compose down
 ```
 
+Several sample requests can be found [here](compose-solution/sample_reqs.md).
+ 
 ## Future work
 
 - Perform Loadtest with a large mount of data to know the limit
