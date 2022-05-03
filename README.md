@@ -56,7 +56,41 @@ Cache:
   - Host: localhost:6379
 ```
 
+Besides that, we could also use make file to build the binary and the docker image of this application easily. 
+
+Build Binary file:
+```
+    make build
+```
+
+Build Docker image:
+```
+    make build_image
+```
+
 ## Setting up a complete demo with containers
 
+To demonstrate how this solution works, one [docker compose file](compose-solution/docker-compose.yml) has been created to create this solution by using several containers. 
+
+Creation:
+
+```
+    docker-compose up --build -d
+```
+
+Deletion:
+```
+    docker-compose down
+```
+
+Before doing the creation, the docker image of this application should be created first. It can be easily created with ```make build_image```. 
+
+The configuraion of application container can be modified in [urlinfo-api.yaml](compose-solution/app/urlinfo-api.yaml).
 
 ## Future work
+
+- Adding monitoring system to this api service by using prometheus
+
+- If the workload for this api service is really high, we could migrate this service from Monolithic Service to Micro service and this will improve the capacity to do horizontal scaling.  
+
+- One cronjob can be created to automatically update the Url Data
