@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"net/url"
 
 	"urlinfo/urlinfo/internal/logic"
 	"urlinfo/urlinfo/internal/svc"
@@ -17,6 +18,9 @@ func UrlLookupHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			httpx.Error(w, err)
 			return
 		}
+
+		req.Queryparamter, _ = url.PathUnescape(req.Queryparamter)
+
 		// Get all querys from the url
 		if len(r.URL.RawQuery) > 0 {
 			req.Queryparamter += "?" + r.URL.RawQuery

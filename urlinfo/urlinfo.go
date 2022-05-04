@@ -7,6 +7,7 @@ import (
 	"urlinfo/urlinfo/internal/config"
 	"urlinfo/urlinfo/internal/handler"
 	"urlinfo/urlinfo/internal/svc"
+	urlinfoRouter "urlinfo/urlinfo/pkg/router"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"
@@ -22,6 +23,11 @@ func main() {
 
 	ctx := svc.NewServiceContext(c)
 	server := rest.MustNewServer(c.RestConf)
+
+	urlinfoRouter := urlinfoRouter.NewRouter()
+
+	rest.WithRouter(urlinfoRouter)(server)
+
 	defer server.Stop()
 
 	handler.RegisterHandlers(server, ctx)
