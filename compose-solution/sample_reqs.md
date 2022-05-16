@@ -2,7 +2,15 @@
 
 ### Get request
 
+URL components 
+
+scheme:[//[userinfo@]host[:port]]path[?query][#fragment]
+
 curl http://localhost:9090/urlinfo/1/linuxize/q?test=1
+
+curl http://localhost:9090/urlinfo/1/www.linuxize.com/tt/q?test=1
+
+curl http://localhost:9090/urlinfo/1/test:test1@linuxize.com/tt/q?test=1
 
 ### response
 

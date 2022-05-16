@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/url"
 	"path"
+	"regexp"
 	"strings"
 
 	"github.com/zeromicro/go-zero/core/search"
@@ -23,6 +24,8 @@ var (
 	ErrInvalidMethod = errors.New("not a valid http method")
 	// ErrInvalidPath is an error that indicates path is not start with /.
 	ErrInvalidPath = errors.New("path must begin with '/'")
+
+	UrlLookupRequestPattern = `^/urlinfo/v?\d/`
 )
 
 type urlinfoRouter struct {
@@ -64,15 +67,24 @@ func (pr *urlinfoRouter) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	reqPath := path.Clean(r.URL.Path)
 
 	//for url lookup function, encoding path with "/"
-	if r.Method == http.MethodGet {
+	urlLookupRequestRegex := regexp.MustCompile(`^/urlinfo/v?\d/`)
+
+	if r.Method == http.MethodGet && urlLookupRequestRegex.MatchString(reqPath) {
 
 		fmt.Println("reqpath:" + reqPath)
 
-		reqPathPrefix := strings.Join(strings.Split(r.URL.Path, "/")[:4], "/")
+		reqPathPrefix := urlLookupRequestRegex.FindString(reqPath)
+		reqPathSurfix := urlLookupRequestRegex.Split(reqPath, -1)[1]
+		// add logic to handle the requests contain user authentication info e.g. http://localhost:8888/urlinfo/1/test:test1@linuxize.com/tt/q?test=1
+		targetUrl, _ := url.Parse("//" + reqPathSurfix)
+		targetReqPathEncode := url.PathEscape(targetUrl.Path)
+		targetUrl.User = nil
+		targetUrl.RawQuery = ""
+		targetUrl.Path = ""
 
-		reqPathSurfix := strings.Join(strings.Split(r.URL.Path, "/")[4:], "/")
+		targetReqPathSurfix := targetUrl.String()[2:] + "/" + targetReqPathEncode
 
-		reqPath = fmt.Sprintf("%s/%s", reqPathPrefix, url.PathEscape(reqPathSurfix))
+		reqPath = fmt.Sprintf("%s%s", reqPathPrefix, targetReqPathSurfix)
 
 		fmt.Println("reqpath modified:" + reqPath)
 	}
