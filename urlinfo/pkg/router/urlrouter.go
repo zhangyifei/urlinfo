@@ -77,7 +77,12 @@ func (pr *urlinfoRouter) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		reqPathSurfix := urlLookupRequestRegex.Split(reqPath, -1)[1]
 		// add logic to handle the requests contain user authentication info e.g. http://localhost:8888/urlinfo/1/test:test1@linuxize.com/tt/q?test=1
 		targetUrl, _ := url.Parse("//" + reqPathSurfix)
-		targetReqPathEncode := url.PathEscape(targetUrl.Path)
+		targetReqPathEncode := ""
+
+		if len(targetUrl.Path) > 0 {
+			targetReqPathEncode = url.PathEscape(targetUrl.Path[1:])
+		}
+
 		targetUrl.User = nil
 		targetUrl.RawQuery = ""
 		targetUrl.Path = ""

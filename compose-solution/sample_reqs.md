@@ -12,6 +12,8 @@ curl http://localhost:9090/urlinfo/1/www.linuxize.com/tt/q?test=1
 
 curl http://localhost:9090/urlinfo/1/test:test1@linuxize.com/tt/q?test=1
 
+curl http://localhost:8888/urlinfo/1/test:test1@linuxize.com/?test=1
+
 ### response
 
 - Allow access
@@ -31,7 +33,7 @@ curl http://localhost:9090/urlinfo/1/test:test1@linuxize.com/tt/q?test=1
 
   ```shell
     curl -X POST -H "Content-Type: application/json" \
-    -d '{"hostnameport": "linuxize", "queryparamter": "q?test=1"}' \
+    -d '{"hostnameport": "linuxize.com", "queryparamter": "tt/q?test=1"}' \
     http://localhost:9090/urlinfo/1/update
   ```
 
