@@ -1,7 +1,7 @@
 # Urlinfo Project
 Url lookup service
 
-Urlinfo is used provide a Url lookup Api service for validating a malware url and it also provide methods to update its malware url database. 
+Urlinfo is used to provide a Url lookup Api service for validating a malware url and it also provide methods to update its malware url database. 
 
 
 ## Architecture
@@ -14,9 +14,9 @@ Urlinfo is used provide a Url lookup Api service for validating a malware url an
 
 - Application Servers
     
-    The Url lookup service instances, created by using Go and Go-zero framework. We could deploy several instances to handle a large number of requests. Inside the application, the rate limiting logic is also added to control the requests. 
+    The Url lookup service instances, created by Go and Go-zero framework. We could deploy several instances to handle a large number of requests. Inside the application, the rate limiting logic is also added to control the requests. 
 
-    Two kinds of apis provided in this service:
+    Two kinds of apis are provided in this service:
        
         1.  Url lookup 
         2.  Update or Batch update the Urls 
@@ -38,7 +38,7 @@ Urlinfo is used provide a Url lookup Api service for validating a malware url an
 
 ## How it works
 
-The application is written by Go and based on the [go-zero](https://github.com/zeromicro/go-zero) project (MIT License). It handle the requests from client side and also use tokenlimit to control the number of requests in order to reduce the server load.
+The application is written by Go and based on the [go-zero](https://github.com/zeromicro/go-zero) project (MIT License). It handles the requests from client side and also use tokenlimit to control the number of requests in order to reduce the server load.
 
 To reduce the memory usage in the app server and ensure the performance, we maintain all the url data in a Mongo DB Shard Cluster and the **secondaryPreferred** read preference is applied to split the reading and writing requests. 
 
