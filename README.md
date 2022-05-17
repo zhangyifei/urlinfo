@@ -35,6 +35,8 @@ Urlinfo is used to provide a Url lookup Api service for validating a malware url
 - Mongo DB Shard Cluster
 
     In order to store data and make the queries efficiently, I create a Mongo DB Shard Cluster as the storage part. The Shard Cluster can handle large number of Url Data. Each Shard in the cluster is a replica set and I use the read preference to split the Read and Write requests. This mechanism can ensure the performance of data reading and writing. 
+    
+    ![Mongo DB Sharded Cluster](https://www.mongodb.com/docs/manual/images/sharded-cluster-production-architecture.bakedsvg.svg "sharded-cluster-production-architecture.bakedsvg")
 
 ## How it works
 
